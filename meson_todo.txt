@@ -1,0 +1,11 @@
+This is a tasklist for the migration from CMake to Meson. (Remove before merging!)
+
+Meson is a build system that is much easier to read and use than CMake.
+
+TODO:
+
+- [ ] migrate share/ to Meson build files.
+- [ ] migrate tests to Meson.
+- [ ] TODOs in po/
+- [ ] migrate necessary CMakeScripts
+- [ ] handle distribution (migrate CPack)
