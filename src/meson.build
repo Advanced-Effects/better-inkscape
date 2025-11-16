@@ -289,24 +289,26 @@ subdir('inkgc')
 subdir('livarot')
 subdir('libnrtype')
 
+cmake = import('cmake')
 
-libcroco_dep = subproject('libcroco')
+libcroco_dep = cmake.subproject('libcroco')
+geom_dep = cmake.subproject('2geom')
+
 libavoid_dep = subproject('adaptagrams/libavoid')
 libcola_dep = subproject('adaptagrams/libcola')
 libvpsc_dep = subproject('adaptagrams/libvpsc')
 libdepixelize_dep = subproject('libdepixelize')
 autotrace_dep = subproject('autotrace')
-geom_dep = dependency('2geom', fallback: ['2geom', 'geom_dep'])
 
 # Link with external dependencies
 lib_inkscape_deps = [
     libcroco_dep,
+    geom_dep,
     libavoid_dep,
     libcola_dep,
     libvpsc_dep,
     libdepixelize_dep,
-    autotrace_dep,
-    geom_dep
+    autotrace_dep
 ]
 
 # Link with libraries from our source code
