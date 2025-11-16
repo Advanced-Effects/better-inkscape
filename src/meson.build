@@ -291,7 +291,7 @@ subdir('libnrtype')
 
 cmake = import('cmake')
 
-libcroco_dep = cmake.subproject('libcroco')
+libcroco_dep = subproject('libcroco')
 geom_dep = cmake.subproject('2geom')
 
 libavoid_dep = subproject('adaptagrams/libavoid')

@@ -1,5 +1,5 @@
 object_src = [
-  box3d-side.cpp
+  'object/box3d-side.cpp',
   'object/box3d.cpp',
   'object/color-profile.cpp',
   'object/object-set.cpp',

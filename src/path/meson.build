@@ -10,7 +10,7 @@ path_src = [
   'path/splinefit/splinefont.c',
   'path/splinefit/splinerefigure.c',
 
-  /# -------
+  # -------
   # Headers
   'path/path-boolop.h',
   'path/path-offset.h',

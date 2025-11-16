@@ -5,10 +5,10 @@ algorithms_src = [
 
   # -------
   # Headers
-  'object/algorithms/bboxsort.h
-  'object/algorithms/graphlayout.h
-  'object/algorithms/removeoverlap.h
-  'object/algorithms/unclump.h
+  'object/algorithms/bboxsort.h',
+  'object/algorithms/graphlayout.h',
+  'object/algorithms/removeoverlap.h',
+  'object/algorithms/unclump.h'
 ]
 
 object_src += algorithms_src
