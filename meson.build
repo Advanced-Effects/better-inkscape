@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-project('inkscape', 'cpp', version : '1.5.0-dev',
+project('inkscape', 'cpp', 'c', version : '1.5.0-dev',
   default_options : [
     'cpp_std=c++20',
     'warning_level=3',

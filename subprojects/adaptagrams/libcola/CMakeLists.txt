@@ -27,4 +27,4 @@ set(libcola_SRC
 )
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")
-add_inkscape_lib(cola_LIB "${libcola_SRC}")
+add_library(cola_LIB ${libcola_SRC})

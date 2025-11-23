@@ -289,33 +289,53 @@ subdir('inkgc')
 subdir('livarot')
 subdir('libnrtype')
 
+###########################
+# Import subprojects
+###########################
+
 cmake = import('cmake')
 
-libcroco_dep = cmake.subproject('libcroco')
-geom_dep = cmake.subproject('2geom')
+# Set CMake options
+options = cmake.subproject_options()
+# Do not build tests since they depend on GTest
+options.add_cmake_defines({'2GEOM_TESTING': false},
+                          {'2GEOM_BUILD_SHARED': true},
+                          {'LIBCROCO_TESTING': false})
 
-libavoid_dep = subproject('adaptagrams/libavoid')
-libcola_dep = subproject('adaptagrams/libcola')
-libvpsc_dep = subproject('adaptagrams/libvpsc')
-libdepixelize_dep = subproject('libdepixelize')
-autotrace_dep = subproject('autotrace')
+libcroco_subproject = cmake.subproject('libcroco', options: options)
+message('- libcroco subproject available targets: ' + '\n + '.join(libcroco_subproject.target_list()) )
+libcroco_dep = libcroco_subproject.target('croco_LIB')
+
+wrapper_subproject = cmake.subproject('wrapper', options: options)
+message('- wrapper subproject available targets: ' + '\n + '.join(wrapper_subproject.target_list()) )
+geom_dep = wrapper_subproject.target('2geom')
+libdepixelize_dep = wrapper_subproject.target('depixelize_LIB')
+
+
+
+
+adaptagrams_subproject = cmake.subproject('adaptagrams')
+libavoid_dep = adaptagrams_subproject.target('avoid_LIB')
+libcola_dep = adaptagrams_subproject.target('cola_LIB')
+libvpsc_dep = adaptagrams_subproject.target('vpsc_LIB')
+
+autotrace_subproject = cmake.subproject('autotrace')
+autotrace_dep = autotrace_subproject.target('autotrace_LIB')
+
+#####################################
 
 # Link with external dependencies
-lib_inkscape_deps = [
+lib_inkscape_deps = []
+
+# Link with libraries from our source code
+lib_inkscape_link = [
     libcroco_dep,
     geom_dep,
     libavoid_dep,
     libcola_dep,
     libvpsc_dep,
     libdepixelize_dep,
-    autotrace_dep
-]
-
-# Link with libraries from our source code
-lib_inkscape_link = [
-    'livarot',
-    'inkgc',
-    'util'
+    autotrace_dep    
 ]
 
 

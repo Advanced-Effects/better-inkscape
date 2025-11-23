@@ -25,4 +25,4 @@ set(libvpsc_SRC
 )
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")
-add_inkscape_lib(vpsc_LIB "${libvpsc_SRC}")
+add_library(vpsc_LIB ${libvpsc_SRC})

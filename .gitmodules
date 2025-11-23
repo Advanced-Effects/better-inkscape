@@ -1,8 +1,8 @@
 [submodule "share/extensions"]
 	path = share/extensions
 	url = https://gitlab.com/inkscape/extensions.git
-[submodule "subprojects/2geom"]
-	path = subprojects/2geom
+[submodule "subprojects/wrapper/2geom"]
+	path = subprojects/wrapper/2geom
 	url = https://gitlab.com/inkscape/lib2geom.git
 [submodule "share/themes"]
 	path = share/themes
