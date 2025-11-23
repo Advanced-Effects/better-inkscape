@@ -68,11 +68,11 @@ extensions_src = [
 	'extension/prefdialog/widget-label.cpp',
 	'extension/prefdialog/widget-separator.cpp',
 	'extension/prefdialog/widget-spacer.cpp',
-	'extension/# ------',
-	'extension/# Header',
+	# ------
+	# Header
 	'extension/db.h',
 	'extension/dependency.h',
-    'extension/    processing-action.h',
+    'extension/processing-action.h',
 	'extension/effect.h',
 	'extension/execution-env.h',
 	'extension/extension.h',
