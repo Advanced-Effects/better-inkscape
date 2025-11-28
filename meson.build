@@ -51,6 +51,7 @@ install_dir = get_option('prefix')
 
 # Subdirectories
 subdir('src')
+subdir('app')
 if with_nls
   subdir('po')
 endif
