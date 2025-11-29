@@ -326,12 +326,10 @@ autotrace_dep = autotrace_subproject.target('autotrace_LIB')
 ###########################
 
 glib_dep = dependency('glib-2.0', required: true)
-gtk_dep = dependency('gtk', version: '4.0', required: true)
 
 # Link with external dependencies
 lib_inkscape_deps = [
-    glib_dep,
-    gtk_dep
+    glib_dep
 ]
 
 # Link with libraries from our source code
