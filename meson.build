@@ -6,6 +6,9 @@ project('inkscape', 'cpp', 'c', version : '1.5.0-dev',
     'warning_level=3',
   ])
 
+# TODO: Make this optional later
+add_global_arguments('-D_AFXDLL=1', language: 'cpp')
+
 # Define output directories
 runtime_output_dir = ''.join([get_option('prefix'), 'bin'])
 library_output_dir = ''.join([get_option('prefix'), 'lib'])

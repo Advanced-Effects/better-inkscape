@@ -325,11 +325,13 @@ autotrace_dep = autotrace_subproject.target('autotrace_LIB')
 # Get external dependencies
 ###########################
 
-glib_dep = dependency('glib-2.0', required: true)
+glibmm_dep = dependency('glibmm-2.68', required: true)
+#gtkmm_dep = dependency('gtkmm-4', required: true)
 
 # Link with external dependencies
 lib_inkscape_deps = [
-    glib_dep
+    glibmm_dep,
+    #gtkmm_dep,
 ]
 
 # Link with libraries from our source code
@@ -343,11 +345,23 @@ lib_inkscape_link = [
     autotrace_dep    
 ]
 
+lib_inkscape_link_args = []
+
+#################################################################
+# Platform-specific configurations
+#################################################################
+cc = meson.get_compiler('cpp')
+
+if cc.get_id() == 'msvc'
+  lib_inkscape_link_args += '/NODEFAULTLIB:LIBCMT'
+endif
+#################################################################
 
 lib_inkscape = shared_library('libinkscape',
     lib_inkscape_src,
     dependencies: lib_inkscape_deps,
-    link_with: lib_inkscape_link
+    link_with: lib_inkscape_link,
+    link_args: lib_inkscape_link_args
 )
 
 inkscape = executable('inkscape',
