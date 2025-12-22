@@ -13,5 +13,5 @@
 	url = https://gitlab.com/inkscape/libcroco.git
 [submodule "po"]
 	path = po
-	url = https://gitlab.com/inkscape/translations.git
-	branch = master
+	url = https://gitlab.com/advanced-effects/design/translations.git
+	branch = meson-support
