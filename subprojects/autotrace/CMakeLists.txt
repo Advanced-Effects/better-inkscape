@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
-project(Autotrace)
+
+project(Autotrace LANGUAGES C)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GLIB REQUIRED glib-2.0)
 
 set (autotrace_SRC
 config.h
@@ -49,3 +53,6 @@ xstd.h
 )
 
 add_library(autotrace_LIB ${autotrace_SRC})
+
+target_include_directories(autotrace_LIB PRIVATE ${GLIB_INCLUDE_DIRS})
+target_link_libraries(autotrace_LIB PRIVATE ${GLIB_LIBRARIES})
