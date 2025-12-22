@@ -85,7 +85,7 @@ inkscape:linux:
   script:
     - mkdir build
     - cd build
-    - cmake .. -GNinja -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr
+    - meson setup .. --prefix=/usr --buildtype=release
     - ninja all tests
   artifacts:
     expire_in: 1 year
@@ -232,7 +232,7 @@ inkscape:macos:
 
 .windows_build_script: &windows_build_script
   # configure
-  - . "${drive}/${Env:ICW_NAME}/usr/bin/bash.exe" -lc 'cmake -B build -G Ninja -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_INSTALL_PREFIX=$CI_PROJECT_DIR/inkscape'
+  - . "${drive}/${Env:ICW_NAME}/usr/bin/bash.exe" -lc 'meson setup build . --prefix=$CI_PROJECT_DIR/inkscape'
   # make + make install
   - . "${drive}/${Env:ICW_NAME}/usr/bin/bash.exe" -lc "ninja -C build install"
   # run dependency checker
@@ -321,7 +321,8 @@ inkscape:android:
     - git config --global safe.directory '*'
     - mkdir build
     - cd build
-    - cmake .. -GNinja -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_TOOLCHAIN_FILE=~/inkscape/deps/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-g0 -DCMAKE_CXX_FLAGS=-g0 -DCMAKE_SHARED_LINKER_FLAGS=-s -DWITH_INTERNAL_2GEOM=ON -DBUILD_TESTING=OFF -DWITH_GNU_READLINE=OFF
+    - meson setup .. --buildtype=release -Dwith_gnu_readline=false -Dwith_internal_2geom=true --cross-file=~/inkscape/deps/conan_toolchain.cmake
+    # TODO: implement flags -DCMAKE_C_FLAGS=-g0 -DCMAKE_CXX_FLAGS=-g0 -DCMAKE_SHARED_LINKER_FLAGS=-s
     - ninja
     - cd ..
     - packaging/android/package.sh
@@ -462,7 +463,7 @@ translations:
   script:
   # update POTFILES.*.in
   - cd po && ./generate_POTFILES.sh
-  - cd .. && mkdir build && cd build && cmake .. && make inkscape_pot && cd .. || exit 1
+  - cd .. && mkdir build && cd build && meson setup .. && make inkscape_pot && cd .. || exit 1
   - cd po/ && ./update_po_files.sh
 
   artifacts:
@@ -531,7 +532,7 @@ scan-build:
   script:
     - mkdir -p clang-build
     - cd clang-build
-    - scan-build cmake .. -DCMAKE_BUILD_TYPE=Debug
+    - scan-build meson setup .. --buildtype=debug
     - VERBOSE=1 scan-build -o ../scan make -j2
   artifacts:
     paths:
@@ -591,7 +592,7 @@ translations:daily:
   script:
     - cd po && git checkout ${CI_COMMIT_BRANCH} && git pull
     - ./generate_POTFILES.sh && cd ..
-    - mkdir build && cd build && cmake .. && make inkscape_pot && cd ../po
+    - mkdir build && cd build && meson setup .. && make inkscape_pot && cd ../po
     - git add . && git commit --author "Inkscape <inkscape-devel@lists.inkscape.org>" -m "Daily code update"
     - git push https://ci:${TRANSLATION_TOKEN}@gitlab.com/inkscape/translations.git ${CI_COMMIT_BRANCH}
     - ../buildtools/post_translation_statistics.sh
