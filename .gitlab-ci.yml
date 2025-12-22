@@ -322,7 +322,7 @@ inkscape:android:
     - mkdir build
     - cd build
     - meson setup .. --buildtype=release -Dwith_gnu_readline=false -Dwith_internal_2geom=true --cross-file=~/inkscape/deps/conan_toolchain.cmake
-    - echo "TODO: implement flags -DCMAKE_C_FLAGS=-g0 -DCMAKE_CXX_FLAGS=-g0 -DCMAKE_SHARED_LINKER_FLAGS=-s"
+    # TODO: implement flags -DCMAKE_C_FLAGS=-g0 -DCMAKE_CXX_FLAGS=-g0 -DCMAKE_SHARED_LINKER_FLAGS=-s
     - ninja
     - cd ..
     - packaging/android/package.sh
