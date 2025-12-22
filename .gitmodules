@@ -3,7 +3,8 @@
 	url = https://gitlab.com/inkscape/extensions.git
 [submodule "subprojects/wrapper/2geom"]
 	path = subprojects/wrapper/2geom
-	url = https://gitlab.com/inkscape/lib2geom.git
+	url = https://gitlab.com/advanced-effects/design/lib2geom.git
+	branch = msvc-support
 [submodule "share/themes"]
 	path = share/themes
 	url = https://gitlab.com/inkscape/themes.git
